@@ -4,7 +4,7 @@ MTMC
 ### Required items before using our method
 - captured frames from multiple cameras.
 - background subtractions for each frame (masks).
-- people detections from the captured frames.
+- people detections frgom the captured frames.
 - see `config_path` and `config_exp` for more information.
 
 ### User Instructions
@@ -20,9 +20,9 @@ MTMC
 - cameras are indexed by nonnegative integer values.
 - images for camera X are indexed under the `cameraX\` folder. each `cameraX\` folder are within the main directory listed under `PATH.data_images_path` in `config_path`. The format for background masks is analogous.
 
-### Workspace description
+### Workspace File Tree
 ```
-MTMC_final/
+MTMC/
 │   1_people_tracker.m        // people detections -> single-camera trajectories
 │   2_extract_features.m      // single-camera trajectories -> features
 │   3_track_across_cameras.m  // single-camera trajectories + features -> MTMC output
