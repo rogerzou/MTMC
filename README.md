@@ -18,10 +18,39 @@ MTMC
 
 ### Important Notes
 - cameras are indexed by nonnegative integer values.
-- images for camera X are indexed under the `cameraX` folder. each `cameraX` folder are within the main directory listed under `PATH.data_images_path` in `config_path`. The format for background masks is analogous.
+- images for camera X are indexed under the `cameraX\` folder. each `cameraX\` folder are within the main directory listed under `PATH.data_images_path` in `config_path`. The format for background masks is analogous.
+
+### Workspace description
+```
+MTMC_final/
+│   1_people_tracker.m        // people detections -> single-camera trajectories
+│   2_extract_features.m      // single-camera trajectories -> features
+│   3_track_across_cameras.m  // single-camera trajectories + features -> MTMC output
+│   README.md
+│   config_exp.m              // configure file paths
+│   config_path.m             // configure experiment settings
+│
+└───src/
+    │
+    ├───extract_features/     // code used by 2_extract_features
+    │   │   extractDetections.m
+    │   │   findPatchCoords.m
+    │   │   ...
+    │
+    ├───misc/                 // miscellaneous functions
+    │   │   frameAdjust.m
+    │   │   loadConfigSettings.m
+    │   │   ...
+    │
+    ├───track_across_cameras/ // code used by 3_track_across_cameras
+    │   │   computeMatrices.m
+    │   │   findAppearanceGroups.m
+    │   │   ...
+    │
+```
 
 ### TODO
-1. Incorporate single-camera people tracking to pipeline by filling in `1_people_tracker` (take from `PeopleTracker\` folder).
+1. Incorporate single-camera people tracking to pipeline by filling in `1_people_tracker`. Place functions used for this section in a new folder `people_tracker/` under `src/` (take from `PeopleTracker\` folder).
 1. Verify the output of `getPositionalInformation` and `getBaselineDescriptor` in the function `2_extract_features`. Francesco says that `getPositionalInformation` "should be changed to have ground plane information.
 ".
 1. Verify that `linkIdentities`, specifically `computeMatrices` does the right thing.
